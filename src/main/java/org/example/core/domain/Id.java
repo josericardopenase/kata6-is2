@@ -8,6 +8,7 @@ public class Id {
     }
 
     public Id(int id) throws DomainException{
+        if(id < 0) throw new DomainException("id cannot be less than 0");
         this.id = id;
     }
 }
