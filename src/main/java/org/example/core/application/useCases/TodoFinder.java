@@ -15,6 +15,6 @@ public class TodoFinder {
     }
 
     public Result<List<Todo>, DomainError> find(){
-        return null
+        return null;
     }
 }
