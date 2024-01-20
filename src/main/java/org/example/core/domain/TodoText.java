@@ -7,7 +7,7 @@ public class TodoText {
         return text;
     }
 
-    public TodoText(String text) {
+    public TodoText(String text) throws DomainException {
         this.text = text;
     }
 }

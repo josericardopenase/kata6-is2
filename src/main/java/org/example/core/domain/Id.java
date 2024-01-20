@@ -7,7 +7,7 @@ public class Id {
         return id;
     }
 
-    public Id(int id) {
+    public Id(int id) throws DomainException{
         this.id = id;
     }
 }
