@@ -8,6 +8,7 @@ public class TodoText {
     }
 
     public TodoText(String text) throws DomainException {
+        if(text.isBlank() || text.isEmpty()) throw new DomainException("text cannot be null");
         this.text = text;
     }
 }
