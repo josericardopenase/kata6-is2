@@ -1,7 +1,7 @@
 package org.example.core.domain;
 
 public class TodoStatus {
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

@@ -5,5 +5,7 @@ public record Todo(
         TodoText text,
         TodoStatus status
 ) {
+    public void check(){}
+    public void uncheck(){}
 
 }
