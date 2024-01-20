@@ -1,10 +1,18 @@
+import org.example.core.application.ports.IdGenerator;
+import org.example.core.application.ports.TodoRespository;
+import org.example.core.application.useCases.TodoCreator;
+import org.example.core.application.useCases.TodoFinder;
 import org.example.core.domain.*;
+import org.example.core.infraestructure.mock.MockIdGenerator;
+import org.example.core.infraestructure.mock.MockTodoRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TodoTests {
+    private final TodoRespository repository = new MockTodoRepository();
+    private final IdGenerator generator = new MockIdGenerator();
     @Test
     public void todo_text_cannot_be_empty(){
         try{
@@ -37,5 +45,24 @@ public class TodoTests {
 
     @Test
     public void create_todo_must_add_todo_to_repository() throws DomainException {
+        var useCase = new TodoCreator(repository, generator);
+        var todo = useCase.create("new todo");
+        assertThat(todo.isOk()).isEqualTo(true);
+        assertThat(repository.findById(todo.getData().id().getId())).isNotNull();
+    }
+
+    @Test
+    public void create_todo_message_must_be_equal_to_passed_message() throws DomainException {
+        var useCase = new TodoCreator(repository, generator);
+        var todo = useCase.create("new todo");
+        assertThat(todo.getData().text().getText()).isEqualTo("new todo");
+    }
+
+    @Test
+    public void find_todos_must_return_all_added_todos(){
+        var useCase = new TodoFinder(repository);
+        var todo = useCase.find();
+        assertThat(todo.getData().isEmpty()).isEqualTo(false);
+        assertThat(todo.getData().size()).isEqualTo(2);
     }
 }
