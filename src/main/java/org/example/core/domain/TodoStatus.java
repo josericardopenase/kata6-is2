@@ -10,4 +10,11 @@ public class TodoStatus {
     }
 
     private final boolean status;
+
+    public static TodoStatus done() {
+        return new TodoStatus(true);
+    }
+    public static TodoStatus inProgress() {
+        return new TodoStatus(false);
+    }
 }

@@ -34,28 +34,28 @@ public class TodoTests {
     public void check_todo_must_change_it_status_to_done() throws DomainException {
         Todo todo = new Todo(new Id(1), new TodoText("hello"), new TodoStatus(false));
         todo.check();
-        assertThat(todo.status().getStatus()).isEqualTo(true);
+        assertThat(todo.getStatus()).isEqualTo(true);
     }
     @Test
     public void uncheck_todo_must_change_it_status_to_working_progress() throws DomainException {
         Todo todo = new Todo(new Id(1), new TodoText("hello"), new TodoStatus(true));
         todo.uncheck();
-        assertThat(todo.status().getStatus()).isEqualTo(false);
+        assertThat(todo.getStatus()).isEqualTo(false);
     }
 
     @Test
     public void create_todo_must_add_todo_to_repository() throws DomainException {
         var useCase = new TodoCreator(repository, generator);
-        var todo = useCase.create("new todo");
-        assertThat(todo.isOk()).isEqualTo(true);
-        assertThat(repository.findById(todo.getData().id().getId())).isNotNull();
+        var result = useCase.create("new todo");
+        assertThat(result.isOk()).isEqualTo(true);
+        assertThat(repository.findById(result.getData().getId())).isNotNull();
     }
 
     @Test
     public void create_todo_message_must_be_equal_to_passed_message() throws DomainException {
         var useCase = new TodoCreator(repository, generator);
-        var todo = useCase.create("new todo");
-        assertThat(todo.getData().text().getText()).isEqualTo("new todo");
+        var result = useCase.create("new todo");
+        assertThat(result.getData().getText()).isEqualTo("new todo");
     }
 
     @Test
