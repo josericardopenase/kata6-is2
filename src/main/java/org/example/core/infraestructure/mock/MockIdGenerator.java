@@ -8,6 +8,7 @@ public class MockIdGenerator implements IdGenerator {
     @Override
     public int generate() {
         current++;
+        System.out.println(current);
         return current;
     }
 }

@@ -48,21 +48,21 @@ public class TodoTests {
         var useCase = new TodoCreator(repository, generator);
         var result = useCase.create("new todo");
         assertThat(result.isOk()).isEqualTo(true);
-        assertThat(repository.findById(result.getData().getId())).isNotNull();
+        assertThat(repository.findById(result.data().getId())).isNotNull();
     }
 
     @Test
     public void create_todo_message_must_be_equal_to_passed_message() throws DomainException {
         var useCase = new TodoCreator(repository, generator);
         var result = useCase.create("new todo");
-        assertThat(result.getData().getText()).isEqualTo("new todo");
+        assertThat(result.data().getText()).isEqualTo("new todo");
     }
 
     @Test
     public void find_todos_must_return_all_added_todos(){
         var useCase = new TodoFinder(repository);
         var todo = useCase.find();
-        assertThat(todo.getData().isEmpty()).isEqualTo(false);
-        assertThat(todo.getData().size()).isEqualTo(2);
+        assertThat(todo.data().isEmpty()).isEqualTo(false);
+        assertThat(todo.data().size()).isEqualTo(2);
     }
 }
