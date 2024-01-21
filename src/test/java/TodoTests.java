@@ -60,9 +60,13 @@ public class TodoTests {
 
     @Test
     public void find_todos_must_return_all_added_todos(){
-        var useCase = new TodoFinder(repository);
-        var todo = useCase.find();
+        var useCase = new TodoCreator(repository, generator);
+        var result = useCase.create("new todo");
+        assertThat(result.data().getText()).isEqualTo("new todo");
+
+        var findUseCase = new TodoFinder(repository);
+        var todo = findUseCase.find();
         assertThat(todo.data().isEmpty()).isEqualTo(false);
-        assertThat(todo.data().size()).isEqualTo(2);
+        assertThat(todo.data().size()).isEqualTo(1);
     }
 }
