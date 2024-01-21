@@ -12,12 +12,12 @@ public record Result<T, E>(T data, E error) {
 
     @Override
     public T data() {
-        return null;
+        return data;
     }
 
     @Override
     public E error() {
-        return null;
+        return error;
     }
 
     public static <T, Error> Result<T, Error> ok(T data) {
