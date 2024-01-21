@@ -2,9 +2,7 @@ package org.example.core.application.useCases;
 
 import org.example.core.application.ports.IdGenerator;
 import org.example.core.application.ports.TodoRespository;
-import org.example.core.domain.DomainError;
-import org.example.core.domain.Result;
-import org.example.core.domain.Todo;
+import org.example.core.domain.*;
 
 public class TodoCreator {
     private final TodoRespository repository;
@@ -16,7 +14,14 @@ public class TodoCreator {
     }
 
     public Result<Todo, DomainError> create(String text){
-        return null;
+        try {
+            var id = new Id(generator.generate());
+            var todoText = new TodoText(text);
+            Todo todo = new Todo(id, todoText, TodoStatus.inProgress());
+            repository.save(todo);
+            return Result;
+        } catch (DomainException e) {
+        }
     }
 
 }
