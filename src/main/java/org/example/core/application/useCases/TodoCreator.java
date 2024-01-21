@@ -19,8 +19,12 @@ public class TodoCreator {
             var todoText = new TodoText(text);
             Todo todo = new Todo(id, todoText, TodoStatus.inProgress());
             repository.save(todo);
-            return Result;
+            return Result.ok(todo);
         } catch (DomainException e) {
+            return Result.fail( new DomainError(
+                    "Invalid data",
+                    200
+            ));
         }
     }
 

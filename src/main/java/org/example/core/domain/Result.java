@@ -27,10 +27,10 @@ public class Result<T, E> {
         return null;
     }
 
-    public static <T>Result<T, NullType> ok(T data){
+    public static <T, Error>Result<T, Error> ok(T data){
         return new Result<>(data, null);
     }
-    public static <T>Result<NullType, T> fail(T data){
+    public static <T, Error>Result<T, Error> fail(Error data){
         return new Result<>(null, data);
     }
 }
